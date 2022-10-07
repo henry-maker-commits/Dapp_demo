@@ -13,6 +13,8 @@
 </template>
 
 <script>
+  import Web3 from 'web3';
+  import abi from '../abi/ERC20.json';
 export default {
   name: 'myConnect',
   props: {
@@ -22,7 +24,7 @@ export default {
     return{};
   },
   mounted(){},
-  methods(){
+  methods:{
     getData(){
       console.log('first')
     },
@@ -54,7 +56,7 @@ export default {
       let web3 = new Web3(window.web3.currentProvider)
       let fromAddress = await web3.eth.getAccounts()
       let amount = 0.01*Math.pow(10,18);
-      let toAddress = "0x17D98A1c1D4814B03d71a08a07AF4C8CCABb7E2E";
+      let toAddress = "0x1c84B5cB3Ab48Bd5314C950716f1E7017b0a1023";
       web3.eth.sendTransaction({
         gas: 21000,
         gasPrice: 5000000000,
@@ -69,8 +71,8 @@ export default {
     async getTokenBalance(){
       if(window.web3) {
         var web3 = web3 = new Web3(window.web3.currentProvider);
-        let fromAddress = "0x394A64e586FC05bD28783351F14dfcc426EFD230";//查询用户地址
-        let ethContract = new web3.eth.Contract(abi.abi,"0x3d2dd604866d0ec1ddd5e8ef27848a6fc0962018") //所有代币的abi可以通用（abi,合约地址）
+        let fromAddress = "0xd7a2CaB0EA71281af0DF030b5e0765109cdD031F";//查询用户地址
+        let ethContract = new web3.eth.Contract(abi,"0x0bba3F3179A384F51990412731a330D6963a2331") //所有代币的abi可以通用（abi,合约地址）
         let balance = await ethContract.methods.balanceOf(fromAddress).call()
         alert(balance)
  
@@ -80,13 +82,13 @@ export default {
     async getTokenTransfer(){
       if(window.web3) {
         let web3 = new Web3(window.web3.currentProvider)
-         let ethContract = new web3.eth.Contract(abi.abi,"0x3d2dd604866d0ec1ddd5e8ef27848a6fc0962018") //所有代币的abi可以通用（abi,合约地址）
+         let ethContract = new web3.eth.Contract(abi,"0x0bba3F3179A384F51990412731a330D6963a2331") //所有代币的abi可以通用（abi,合约地址）
         //转账数量
         let amount = 100*Math.pow(10,18);//转账100个
         //小狐狸账户
         let fromAddress = await web3.eth.getAccounts()
         //接收地址
-        let toAddress = "0xcaD75EADAf24F41d6274E129d7aE54764d7cd8E7";
+        let toAddress = "0x1c84B5cB3Ab48Bd5314C950716f1E7017b0a1023";
         ethContract.methods.transfer(toAddress,amount+'').send({ from: fromAddress[0] })
     }
  
@@ -95,9 +97,9 @@ export default {
     async getAllowance(){
       if(window.web3) {
         let web3 = new Web3(window.web3.currentProvider)
-        let fromAddress = "0x394A64e586FC05bD28783351F14dfcc426EFD230";//查询地址
-        let ethContract = new web3.eth.Contract(abi.abi,"0x3d2dd604866d0ec1ddd5e8ef27848a6fc0962018") //所有代币的abi可以通用（abi,合约地址）
-        let toAddress = "0xcaD75EADAf24F41d6274E129d7aE54764d7cd8E7";//被授权地址
+        let fromAddress = "0xd7a2CaB0EA71281af0DF030b5e0765109cdD031F";//查询地址
+        let ethContract = new web3.eth.Contract(abi,"0x0bba3F3179A384F51990412731a330D6963a2331") //所有代币的abi可以通用（abi,合约地址）
+        let toAddress = "0xd7a2CaB0EA71281af0DF030b5e0765109cdD031F";//被授权地址
         let balance = await ethContract.methods.allowance(fromAddress,toAddress).call()
         alert("授权金额"+balance/Math.pow(10,18))
  
@@ -108,10 +110,10 @@ export default {
     async getApprove(){
       if(window.web3) {
         let web3 = new Web3(window.web3.currentProvider)
-        let ethContract = new web3.eth.Contract(abi.abi,"0x3d2dd604866d0ec1ddd5e8ef27848a6fc0962018") //所有代币的abi可以通用（abi,合约地址）
+        let ethContract = new web3.eth.Contract(abi,"0x0bba3F3179A384F51990412731a330D6963a2331") //所有代币的abi可以通用（abi,合约地址）
         //授权数量
         let amount = 100*Math.pow(10,18);//转账100个
-        let toAddress = "0xcaD75EADAf24F41d6274E129d7aE54764d7cd8E7";//被授权地址
+        let toAddress = "0xd7a2CaB0EA71281af0DF030b5e0765109cdD031F";//被授权地址
         //小狐狸账户
         let fromAddress = await web3.eth.getAccounts()
         ethContract.methods.approve(toAddress,amount+'').send({ from: fromAddress[0] })
