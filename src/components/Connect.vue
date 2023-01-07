@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <button @click = "get">connect wallet</button>
+    <button @click="get">connect wallet</button>
     <button @click="getETH">获取账户信息</button>
     <button @click="getTransfer">ETH转帐</button>
     <button @click="getTokenBalance">代币余额</button>
